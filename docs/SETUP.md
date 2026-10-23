@@ -21,6 +21,7 @@ You can build and test everything without the Apple and Google Play accounts. Yo
 Commands in this guide (`npm ...`, `npx ...`, `git ...`) are typed into a **terminal** on your computer:
 - **Mac:** press ⌘ Space, type **Terminal**, press Enter.
 - **Windows:** Start menu, type **Terminal** (or **PowerShell**), press Enter.
+- **Linux (CachyOS / Arch):** open **Konsole** (KDE) or your desktop's terminal app. Install everything with `sudo pacman -S nodejs-lts-krypton npm git` and skip the two install steps below.
 
 Install these once:
 1. **Node.js** (LTS version) from [nodejs.org](https://nodejs.org). This also installs `npm` and `npx`.
