@@ -75,7 +75,7 @@ To put it online: import the repo into Vercel, set **Root Directory** to `apps/a
 
 ```bash
 cd apps/mobile
-cp .env.example .env         # Supabase URL + anon key, Android maps key, your Discord invite
+cp .env.example .env         # Supabase URL + anon key, Android maps key (Discord invite is pre-filled)
 npm install
 npx expo start
 ```

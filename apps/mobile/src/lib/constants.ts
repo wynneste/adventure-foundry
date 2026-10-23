@@ -60,4 +60,4 @@ export const REPORT_REASONS = [
 export const labelFor = <T extends string>(list: { value: T; label: string }[], v: T) =>
   list.find((x) => x.value === v)?.label ?? v;
 
-export const COMMUNITY_DISCORD_URL = process.env.EXPO_PUBLIC_COMMUNITY_DISCORD_URL ?? "";
+export const COMMUNITY_DISCORD_URL = process.env.EXPO_PUBLIC_COMMUNITY_DISCORD_URL || "https://discord.gg/Fe39AC7zg";
