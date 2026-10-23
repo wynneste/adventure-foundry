@@ -16,13 +16,38 @@ Everything here starts on a free tier. Do the steps in order; each takes 5–20 
 
 You can build and test everything without the Apple and Google Play accounts. You only need them to publish.
 
+## 0.5 Get your computer ready
+
+Commands in this guide (`npm ...`, `npx ...`, `git ...`) are typed into a **terminal** on your computer:
+- **Mac:** press ⌘ Space, type **Terminal**, press Enter.
+- **Windows:** Start menu, type **Terminal** (or **PowerShell**), press Enter.
+
+Install these once:
+1. **Node.js** (LTS version) from [nodejs.org](https://nodejs.org). This also installs `npm` and `npx`.
+2. **Git** from [git-scm.com](https://git-scm.com/downloads). On a Mac, typing `git` in Terminal offers to install it.
+
+Check they work by typing `node -v` and then `git --version`. Each should print a version number.
+
+Download the code (one time):
+```bash
+git clone https://github.com/wynneste/adventure-foundry.git
+cd adventure-foundry
+```
+`cd` means "go into this folder". Every command below assumes you start in this `adventure-foundry` folder. If you close the terminal, open a new one and run `cd adventure-foundry` again.
+
 ## 1. Create the Supabase project
 
 1. Create a project at supabase.com. Pick a US Central region if offered.
-2. Install the CLI: `npm i -g supabase`, then `supabase login`.
-3. From this repo's root: `supabase link --project-ref <your-project-ref>`
-4. Push the database: `supabase db push`. This runs `supabase/migrations/*.sql`.
-5. In **Project Settings → API**, copy the **Project URL**, **anon key** and **service_role key**. Keep the service role key secret.
+2. Load the database. Use **either** option:
+   - **Easiest:** in Supabase, open **SQL Editor → New query**. Paste the entire contents of `supabase/migrations/20261023000001_init.sql` and click **Run**.
+   - **With the command line** (from the `adventure-foundry` folder). `npx` downloads the Supabase tool for you, so there's nothing to install:
+     ```bash
+     npx supabase login
+     npx supabase link --project-ref <your-project-ref>
+     npx supabase db push
+     ```
+     Your project ref is the random part of your project URL: `https://<project-ref>.supabase.co`.
+3. In **Project Settings → API**, copy the **Project URL**, **anon key** and **service_role key**. Keep the service role key secret.
 
 ## 2. Sign-in providers (Supabase → Authentication → Providers)
 
@@ -42,10 +67,10 @@ Add these **redirect URLs** under Authentication → URL Configuration:
 2. Create **two API keys**:
    - *Places key*: restrict to Places API (New). Used only on the server.
    - *Android Maps key*: restrict to Maps SDK for Android and your app's package name.
-3. Give the Places key to the store importer and deploy it:
+3. Give the Places key to the store importer and deploy it. Run these from the `adventure-foundry` folder. If you loaded the database through the SQL Editor, run `npx supabase login` and `npx supabase link --project-ref <your-project-ref>` first.
    ```bash
-   supabase secrets set GOOGLE_PLACES_API_KEY=<places key>
-   supabase functions deploy import-stores
+   npx supabase secrets set GOOGLE_PLACES_API_KEY=<places key>
+   npx supabase functions deploy import-stores
    ```
 4. Set a **budget alert** in Google Cloud Billing (e.g. $5) so nothing surprises you.
 
